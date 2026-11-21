@@ -23,8 +23,9 @@ Do not silently remove, rename, or restructure approved features. Do not claim t
 - Target experience: mobile-only.
 - Main implementation artifact: a single React source file.
 - Keep application code in the single React source file; do not split implementation into additional source files unless the user explicitly changes this requirement.
-- Design for a mobile viewport and touch interaction. Do not create tablet or desktop layouts.
-- If displayed in a desktop preview, keep the application rendered as a centered mobile-width experience; do not convert it into a desktop website.
+- Mobile-only is a strict product requirement: design and implement the storefront exclusively for mobile phone viewports and touch interaction. Do not create tablet, desktop, or responsive desktop layouts.
+- Use a consistent mobile app viewport with a practical maximum width (for example, 430–480 CSS px) when shown in a wider Canvas preview. Center the mobile viewport on the preview canvas with a neutral surrounding background; the storefront itself must retain its mobile layout and proportions.
+- Do not stretch the storefront to fill a desktop browser, add desktop navigation, introduce multi-column desktop compositions, or change the mobile information architecture at wider viewport sizes.
 - Product catalog scope: Apple product categories, including iPhone, iPad, Mac, Apple Watch, AirPods, and Accessories.
 - Product options may include color, storage capacity, and size where relevant to the product.
 - Currency: Malaysian Ringgit (MYR), formatted as RM.
@@ -257,20 +258,66 @@ ApplicationRoot (height: 100%; display: flex; flex-direction: column)
 └── BottomNavigation / PageBottomActions (flex: 0 0 auto)
 ```
 
-## 6. Theme & Design System
+## 7. Storefront Mobile UI Design System
 
-Create a consistent mobile commerce design system:
-- Define reusable color, typography, spacing, radius, shadow, border, and elevation tokens.
-- Use a clear visual hierarchy and readable typography.
-- Use consistent button, input, card, badge, icon, product tile, and navigation styles.
-- Provide clear states for default, pressed, selected, disabled, loading, success, and error.
-- Use touch-friendly controls and adequate spacing.
-- Respect device safe areas and avoid content being obscured by system areas or fixed navigation. Follow the full-height flex-column root and independently scrollable flex-1 main-content rules in Section 6.
-- Keep product imagery proportional and avoid distortion.
-- Maintain visual consistency across AppShell, StandalonePages, and Overlay.
-- Do not introduce arbitrary styles separately for each page when a shared token/component is appropriate.
+The visual system must be a purpose-built mobile storefront UI, not a generic website template or desktop ecommerce layout.
 
-## 7. Product Catalog & Product Detail
+### 7.1 Visual Direction
+
+- Create a modern, premium, clean, product-focused mobile shopping experience suitable for an Apple-product catalog.
+- Use restrained visual styling: clear surfaces, generous but efficient spacing, strong product imagery, readable typography, subtle borders/shadows, and deliberate accent colors.
+- Prioritize product discovery, product comparison, price visibility, variant selection, and a low-friction purchase journey.
+- Use a consistent visual language across Home, Products, ProductDetailPage, CartPage, CheckoutPage, OrdersPage, and all overlays.
+- Do not copy Apple's official website or imply affiliation. Use an original storefront identity and the approved store branding/assets when provided.
+- Avoid excessive gradients, oversized decorative elements, crowded cards, inconsistent corner radii, and unnecessary animation.
+
+### 7.2 Design Tokens
+
+Define reusable tokens for:
+- Color: app background, primary surface, secondary surface, primary text, secondary text, muted text, border/divider, primary action, accent, success, warning, and error.
+- Typography: font family, display/title/body/label/caption sizes, weights, line heights, and letter spacing.
+- Spacing: a consistent spacing scale for page gutters, section gaps, card padding, and control spacing.
+- Shape: shared radii for cards, buttons, inputs, chips, sheets, and image containers.
+- Elevation: restrained shadow levels and border treatments.
+- Motion: short, purposeful transitions for pressed, selected, expanded, and overlay states.
+- Sizing: minimum touch target dimensions, icon sizes, control heights, and mobile page gutters.
+
+Use tokens consistently. Do not scatter unrelated hardcoded values across individual pages when a shared token is appropriate.
+
+### 7.3 Storefront Components & Patterns
+
+- GlobalHeader: compact mobile header with store identity and clear notification, cart, and profile actions.
+- Search: prominent, easy-to-reach product search field with clear focus and empty-result states.
+- Category navigation: horizontally scrollable category chips or compact category tiles.
+- Promotional content: restrained campaign/featured-product banners with clear hierarchy and actionable CTAs.
+- Product listing: mobile-first product grid, normally two columns on phone widths, with consistent image ratio, title, price, optional comparison/availability information, and clear tap behavior.
+- ProductCard: consistent image area, concise product name, readable RM price, optional variant/stock indicator, and predictable spacing.
+- ProductDetail: strong product image/gallery, concise product information, variant controls, stock/quantity selection, price, and a clear purchase action.
+- Cart and Checkout: compact, scannable order summaries with clearly separated subtotal, fixed shipping fee, and total.
+- BottomNavigation: compact mobile navigation with clear active state, icon, and label.
+- Empty, loading, error, and success states: designed as intentional storefront states rather than browser-default messages.
+
+### 7.4 Mobile Layout Rules
+
+- Use mobile-first sizing and a consistent horizontal page gutter.
+- Respect safe-area insets, especially at the top and bottom of the viewport.
+- Keep important actions reachable and controls comfortable for touch.
+- Avoid horizontal page overflow; horizontal scrolling is allowed only for intentional components such as category chips or image galleries.
+- Use responsive image sizing with stable aspect ratios and `object-fit: contain` for product photography unless the image content requires another treatment.
+- Maintain readable content density: avoid both cramped layouts and excessive empty space.
+- Keep sticky/fixed actions from covering content; reserve the required bottom inset/padding.
+- Do not introduce desktop-specific breakpoints or alter the storefront composition for wide screens.
+
+### 7.5 Interaction & Component States
+
+- Define consistent default, hover (where applicable), pressed, focused, selected, disabled, loading, success, and error states.
+- Provide visible focus indicators and accessible contrast.
+- Use clear selected states for category chips, filters, sort options, and product variants.
+- Ensure overlays and bottom sheets match the same token system.
+- Motion must communicate state changes and must not delay or obstruct essential actions.
+
+
+## 8. Product Catalog & Product Detail
 
 Product data must be structured consistently and be the source of truth for product displays and cart calculations.
 
@@ -294,7 +341,7 @@ ProductDetailPage requirements:
 - Give clear success/error feedback.
 - Do not invent product specifications, prices, stock, or warranty claims. Clearly label sample catalog data as demo/mock data until real data is connected.
 
-## 8. Cart & State Management
+## 9. Cart & State Management
 
 - Use a centralized cart state/context so CartPage, GlobalHeader cart count, ProductDetailPage, and checkout remain synchronized.
 - A cart line must identify the product and selected variant.
@@ -307,7 +354,7 @@ ProductDetailPage requirements:
 - Persist cart state locally and recover safely after reload.
 - Do not clear the cart until order creation has been saved successfully.
 
-## 9. Checkout Requirements
+## 10. Checkout Requirements
 
 Business rules already decided:
 - Shipping is handled manually.
@@ -334,7 +381,7 @@ Initial order statuses:
 - Payment status: `pending`.
 - Shipping/fulfillment status: `pending`.
 
-## 10. Order Success, Orders & Order Detail
+## 11. Order Success, Orders & Order Detail
 
 OrderSuccessPage:
 - Appears only after an order has been successfully saved.
@@ -354,7 +401,7 @@ OrderDetailPage:
 - Must use the saved order snapshot rather than recalculating historical order prices from a potentially changed product catalog.
 - Handles unknown or missing order IDs with a clear not-found state and a route back to OrdersPage.
 
-## 11. Local Persistence & Data Integrity
+## 12. Local Persistence & Data Integrity
 
 - Use browser LocalStorage for cart and order persistence in this React web application.
 - Use centralized, named storage keys and safe JSON parsing/stringifying helpers.
@@ -366,7 +413,7 @@ OrderDetailPage:
 - Clearly distinguish local/demo persistence from a production backend. Do not claim that local orders are synchronized across devices or visible to store staff.
 - Keep storage operations behind helper functions so persistence can be replaced by a backend later without rewriting page components.
 
-## 12. Shared Components & Interaction Quality
+## 13. Shared Components & Interaction Quality
 
 Create reusable components where appropriate, including:
 - PageHeader for standalone page titles and back navigation.
@@ -386,7 +433,7 @@ Interaction requirements:
 - Avoid dead buttons, placeholder links, and controls that appear functional but do nothing.
 - Preserve user input when validation or persistence fails.
 
-## 13. Accessibility, Performance & Reliability
+## 14. Accessibility, Performance & Reliability
 
 - Use semantic elements and accessible names for controls.
 - Ensure text and controls have sufficient contrast.
@@ -399,7 +446,7 @@ Interaction requirements:
 - Ensure fixed/sticky elements do not cover scrollable content.
 - Include empty, loading, error, and success states where relevant.
 
-## 14. Error Handling & Validation
+## 15. Error Handling & Validation
 
 Handle at minimum:
 - Product not found.
@@ -416,7 +463,7 @@ Handle at minimum:
 
 Errors must be understandable to the user and must not silently discard cart or checkout data.
 
-## 15. Implementation & Change Control
+## 16. Implementation & Change Control
 
 - Treat this master prompt and explicit user decisions as the requirements source of truth.
 - Before changing existing code, inspect the current implementation and preserve working behavior.
@@ -427,7 +474,7 @@ Errors must be understandable to the user and must not silently discard cart or 
 - When a requirement is genuinely undecided, mark it as undecided and isolate it behind a clear configuration point.
 - After implementation, perform a focused audit and report issues honestly.
 
-## 16. Acceptance Criteria
+## 17. Acceptance Criteria
 
 The application is acceptable when all of the following are true:
 
@@ -438,6 +485,7 @@ The application is acceptable when all of the following are true:
 5. BottomNavigation contains Home, Products, and LiveChat.
 6. Notification, Cart, LiveChat, ProductDetailPage, CheckoutPage, OrderSuccessPage, OrdersPage, and OrderDetailPage render as standalone pages without AppShell navigation.
 7. Overlay primitives work above both AppShell and StandalonePages.
+8. The UI follows the dedicated Storefront Mobile UI Design System and does not transform into a desktop/tablet layout at wider preview sizes.
 8. BottomSheet supports the specified mobile interaction behavior.
 9. Product selection, variants, stock, cart quantities, and cart badge remain synchronized.
 10. Checkout validates required information and calculates subtotal + RM 52 correctly.
@@ -448,7 +496,7 @@ The application is acceptable when all of the following are true:
 15. Empty, loading, error, and success states are handled.
 16. No visible control is inert and no unsupported business claim is presented.
 
-## 17. Decisions Still Open
+## 18. Decisions Still Open
 
 The following items must remain undecided until the user provides requirements:
 - Payment method and payment provider.
@@ -461,7 +509,7 @@ The following items must remain undecided until the user provides requirements:
 Never fill these gaps with invented facts. Use clearly labeled demo data only where needed to build and test the interface.
 
 
-## 18. Gemini Canvas Operating Instructions
+## 19. Gemini Canvas Operating Instructions
 
 These instructions adapt the project workflow specifically for Google Gemini Canvas. All requirements in Sections 1–17 remain in force. This section changes the execution workflow only; it does not change the approved product scope, architecture, or business rules.
 
