@@ -233,6 +233,30 @@ Application Source
 
 This is an organizational guide inside one file, not a requirement to create separate files.
 
+## 6. Global Application Layout
+
+Use a full-height vertical flex layout as the foundation of the application.
+
+Required layout behavior:
+- The application root must occupy 100% of the available viewport height. Use `height: 100%` with the required parent-height setup, and use `100dvh` where appropriate to account for mobile browser viewport changes.
+- The root must use `display: flex` and `flex-direction: column`.
+- The primary content area (`MainContent` in AppShell, or the equivalent page content area in a StandalonePage) must use `flex: 1` so it fills the remaining vertical space.
+- The primary content area must be independently vertically scrollable using `overflow-y: auto`.
+- Set `min-height: 0` on the flex child that scrolls so its content can overflow within the available height instead of expanding the root.
+- Header and bottom navigation remain outside the scrolling content area and must not shrink unexpectedly. They should stay visible while the main content scrolls, without requiring fixed positioning.
+- Apply the same root-and-scroll-area principle to StandalonePages, adapting the non-scrolling top and bottom regions to each page.
+- Prevent horizontal overflow and ensure safe-area insets are respected.
+- Do not make the entire document/page scroll when the intended behavior is for the main content region to scroll.
+
+Conceptual structure:
+
+```text
+ApplicationRoot (height: 100%; display: flex; flex-direction: column)
+├── Header / PageHeader (flex: 0 0 auto)
+├── MainContent (flex: 1; min-height: 0; overflow-y: auto)
+└── BottomNavigation / PageBottomActions (flex: 0 0 auto)
+```
+
 ## 6. Theme & Design System
 
 Create a consistent mobile commerce design system:
@@ -241,7 +265,7 @@ Create a consistent mobile commerce design system:
 - Use consistent button, input, card, badge, icon, product tile, and navigation styles.
 - Provide clear states for default, pressed, selected, disabled, loading, success, and error.
 - Use touch-friendly controls and adequate spacing.
-- Respect device safe areas and avoid content being obscured by system areas or fixed navigation.
+- Respect device safe areas and avoid content being obscured by system areas or fixed navigation. Follow the full-height flex-column root and independently scrollable flex-1 main-content rules in Section 6.
 - Keep product imagery proportional and avoid distortion.
 - Maintain visual consistency across AppShell, StandalonePages, and Overlay.
 - Do not introduce arbitrary styles separately for each page when a shared token/component is appropriate.
@@ -407,7 +431,7 @@ Errors must be understandable to the user and must not silently discard cart or 
 
 The application is acceptable when all of the following are true:
 
-1. It renders as a mobile-only online store experience.
+1. It renders as a mobile-only online store experience with a 100%-height flex-column root and a flex-1, vertically scrollable main content area.
 2. The implementation is contained in one React source file.
 3. AppShell contains GlobalHeader, MainContent, and BottomNavigation.
 4. MainContent contains Home, Products, and Profile.
