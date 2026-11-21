@@ -308,6 +308,26 @@ Use tokens consistently. Do not scatter unrelated hardcoded values across indivi
 - Keep sticky/fixed actions from covering content; reserve the required bottom inset/padding.
 - Do not introduce desktop-specific breakpoints or alter the storefront composition for wide screens.
 
+### 7.6 Semantic HTML & React DOM Nesting
+
+- Use valid, semantic HTML elements throughout the application.
+- Never nest an interactive element inside another interactive element. In particular, a `<button>` must never contain another `<button>`, and an anchor must not contain another interactive control.
+- A `<button>` represents one independent action. Use a non-interactive container such as `<div>`, `<header>`, or an appropriate semantic layout element to group multiple action buttons.
+- In GlobalHeader, the brand area and each action (Notification, Cart, Profile) must be structurally independent. Never wrap the entire header action group or an individual action button inside another button.
+- If a clickable card or row also contains independent actions, do not make the outer card a button. Use a non-interactive container with separate buttons/links, or restructure the interaction so controls are not nested.
+- Use `<button type="button">` for in-app actions that do not submit a form. Use submit buttons only for actual form submission.
+- Do not use clickable `<div>` elements as a shortcut when a semantic button or link is appropriate.
+- Check other common invalid structures, including nested forms and invalid list/table structures.
+- Treat React warnings and browser console errors as defects to investigate and fix, not as harmless messages.
+
+When a DOM nesting warning occurs:
+1. Read the complete warning and component stack to identify the owning component and source location.
+2. Inspect the rendered JSX structure around the reported elements.
+3. Find the actual invalid nesting; do not merely suppress the warning or hide console output.
+4. Refactor the markup while preserving behavior, accessibility, event handlers, styling, and touch targets.
+5. Re-run the Canvas preview and reproduce the affected interaction.
+6. Confirm the warning is gone and no interaction or visual regression was introduced.
+
 ### 7.5 Interaction & Component States
 
 - Define consistent default, hover (where applicable), pressed, focused, selected, disabled, loading, success, and error states.
@@ -495,6 +515,7 @@ The application is acceptable when all of the following are true:
 14. OrdersPage and OrderDetailPage read the saved local order data correctly.
 15. Empty, loading, error, and success states are handled.
 16. No visible control is inert and no unsupported business claim is presented.
+17. No invalid nested interactive elements or React DOM nesting warnings remain in the browser console.
 
 ## 18. Decisions Still Open
 
