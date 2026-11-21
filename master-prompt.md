@@ -21,8 +21,8 @@ Do not silently remove, rename, or restructure approved features. Do not claim t
 - Application type: online store.
 - Framework: React.
 - Target experience: mobile-only.
-- Main implementation artifact: a single `App.jsx` file.
-- Keep application code in `App.jsx`; do not split implementation into additional source files unless the user explicitly changes this requirement.
+- Main implementation artifact: a single React source file.
+- Keep application code in the single React source file; do not split implementation into additional source files unless the user explicitly changes this requirement.
 - Design for a mobile viewport and touch interaction. Do not create tablet or desktop layouts.
 - If displayed in a desktop preview, keep the application rendered as a centered mobile-width experience; do not convert it into a desktop website.
 - Product catalog scope: Apple product categories, including iPhone, iPad, Mac, Apple Watch, AirPods, and Accessories.
@@ -197,12 +197,12 @@ OrdersPage
 OrderDetailPage
 ```
 
-## 5. App.jsx Internal Structure
+## 5. Application Internal Structure
 
 Keep the single-file implementation organized in clearly labeled sections. Use this logical order:
 
 ```text
-App.jsx
+Application Source
 ├── 1. App Configuration
 ├── 2. Constants & Environment
 ├── 3. Theme & Design System
@@ -397,7 +397,7 @@ Errors must be understandable to the user and must not silently discard cart or 
 - Treat this master prompt and explicit user decisions as the requirements source of truth.
 - Before changing existing code, inspect the current implementation and preserve working behavior.
 - Do not modify unrelated files or repository configuration.
-- Keep the implementation in App.jsx unless the user explicitly authorizes a different structure.
+- Keep the implementation in the single React source file unless the user explicitly authorizes a different structure.
 - Do not add unapproved pages to AppShell or StandalonePages.
 - Do not add unapproved business rules, payment methods, shipping services, or external integrations.
 - When a requirement is genuinely undecided, mark it as undecided and isolate it behind a clear configuration point.
@@ -408,7 +408,7 @@ Errors must be understandable to the user and must not silently discard cart or 
 The application is acceptable when all of the following are true:
 
 1. It renders as a mobile-only online store experience.
-2. The implementation is contained in one App.jsx file.
+2. The implementation is contained in one React source file.
 3. AppShell contains GlobalHeader, MainContent, and BottomNavigation.
 4. MainContent contains Home, Products, and Profile.
 5. BottomNavigation contains Home, Products, and LiveChat.
@@ -446,7 +446,7 @@ These instructions adapt the project workflow specifically for Google Gemini Can
 - Build and maintain the application directly in Gemini Canvas.
 - Create or update a runnable React application artifact in Canvas, not just a written plan, screenshot, static mockup, or design description.
 - Use the Canvas preview to inspect the actual rendered application after implementation and after meaningful changes.
-- Keep the implementation in one `App.jsx` source file as required by this project. If the Canvas runtime requires supporting configuration or generated files, keep them to the minimum necessary and do not move application components or business logic out of `App.jsx`.
+- Keep the implementation in one React source file as required by this project. If the Canvas runtime requires supporting configuration or generated files, keep them to the minimum necessary and do not move application components or business logic out of the primary source file.
 - Do not assume that Canvas automatically provides a backend, database, authentication, payment gateway, shipping API, or persistent server storage.
 - If a Canvas limitation prevents an exact requirement from being implemented, explain the limitation and provide the closest compliant implementation without silently changing the requirement.
 
@@ -456,7 +456,7 @@ At the beginning of a new task:
 1. Read this entire master prompt and treat Sections 1–17 as approved requirements.
 2. Inspect the current Canvas code and preview before editing.
 3. Identify which page, component, state flow, or behavior the requested change affects.
-4. Preserve existing working functionality and the single-file App.jsx architecture.
+4. Preserve existing working functionality and the single-file React architecture.
 5. If the request conflicts with a locked requirement, explain the conflict and ask for a decision instead of choosing silently.
 6. If a required business decision is still open, keep it undecided. Do not block unrelated implementation work.
 
@@ -467,7 +467,7 @@ Do not regenerate the entire application for a small targeted change. Prefer the
 For each implementation task:
 1. State the specific scope of the change briefly.
 2. Modify the Canvas React code directly.
-3. Keep the code organized according to the App.jsx section order in Section 5.
+3. Keep the code organized according to the application source section order in Section 5.
 4. Reuse existing state, utilities, design tokens, and shared components where appropriate.
 5. Keep navigation, cart, product, checkout, and order state consistent across pages.
 6. Avoid adding dependencies unless they are necessary and supported by the Canvas environment.
