@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Apple Store Malaysia Mobile Design System",
+  "version": "1.0.0",
+  "description": "Shared design tokens and component specifications for the React Native App.jsx mobile application.",
+  "platform": {
+    "type": "mobile-only",
+    "targets": ["ios", "android"],
+    "unit": "dp",
+    "safeArea": {
+      "useSafeAreaInsets": true,
+      "edges": ["top", "right", "bottom", "left"],
+      "note": "Insets are runtime values; never hardcode device-specific safe-area heights."
+    },
+    "statusBar": {
+      "style": "auto",
+      "backgroundColor": "transparent",
+      "translucentAndroid": true
+    }
+  },
+  "market": {
+    "country": "MY",
+    "countryName": "Malaysia",
+    "currency": "MYR",
+    "currencySymbol": "RM",
+    "locale": "en-MY",
+    "supportedLocales": ["en-MY", "ms-MY"],
+    "currencyDisplay": "symbol",
+    "currencyFractionDigits": 2,
+    "currencyFormatting": {
+      "useIntlNumberFormat": true,
+      "example": "RM 4,999.00"
+    }
+  },
+  "principles": [
+    "Mobile-first layouts for iOS and Android only.",
+    "Premium, minimal, product-focused visual hierarchy.",
+    "Use native React Native components and platform-appropriate behavior.",
+    "Prefer reusable tokens over hardcoded visual values.",
+    "Maintain readable contrast, touch targets, and accessible labels.",
+    "Do not imply Apple affiliation, authorization, or endorsement unless independently verified."
+  ],
+  "color": {
+    "light": {
+      "background": "#FFFFFF",
+      "surface": "#F5F5F7",
+      "surfaceElevated": "#FFFFFF",
+      "surfaceMuted": "#EFEFF1",
+      "textPrimary": "#1D1D1F",
+      "textSecondary": "#6E6E73",
+      "textTertiary": "#86868B",
+      "border": "#D2D2D7",
+      "separator": "#E5E5EA",
+      "primary": "#0071E3",
+      "primaryPressed": "#005BB5",
+      "onPrimary": "#FFFFFF",
+      "success": "#248A3D",
+      "warning": "#B76E00",
+      "danger": "#D70015",
+      "overlay": "rgba(0, 0, 0, 0.40)",
+      "disabled": "#B8B8BD"
+    },
+    "dark": {
+      "background": "#000000",
+      "surface": "#1C1C1E",
+      "surfaceElevated": "#2C2C2E",
+      "surfaceMuted": "#3A3A3C",
+      "textPrimary": "#F5F5F7",
+      "textSecondary": "#A1A1A6",
+      "textTertiary": "#86868B",
+      "border": "#38383A",
+      "separator": "#38383A",
+      "primary": "#2997FF",
+      "primaryPressed": "#0077ED",
+      "onPrimary": "#FFFFFF",
+      "success": "#30D158",
+      "warning": "#FFD60A",
+      "danger": "#FF453A",
+      "overlay": "rgba(0, 0, 0, 0.64)",
+      "disabled": "#636366"
+    },
+    "semanticAliases": {
+      "screenBackground": "background",
+      "cardBackground": "surfaceElevated",
+      "heading": "textPrimary",
+      "body": "textSecondary",
+      "interactive": "primary",
+      "hairline": "separator"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "ios": "System",
+      "android": "System",
+      "fallback": "sans-serif"
+    },
+    "weights": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "scale": {
+      "display": { "fontSize": 36, "lineHeight": 43, "fontWeight": "700", "letterSpacing": -0.8 },
+      "largeTitle": { "fontSize": 32, "lineHeight": 38, "fontWeight": "700", "letterSpacing": -0.6 },
+      "title1": { "fontSize": 28, "lineHeight": 34, "fontWeight": "600", "letterSpacing": -0.4 },
+      "title2": { "fontSize": 22, "lineHeight": 28, "fontWeight": "600", "letterSpacing": -0.2 },
+      "title3": { "fontSize": 20, "lineHeight": 25, "fontWeight": "600", "letterSpacing": 0 },
+      "headline": { "fontSize": 17, "lineHeight": 22, "fontWeight": "600", "letterSpacing": 0 },
+      "body": { "fontSize": 17, "lineHeight": 24, "fontWeight": "400", "letterSpacing": 0 },
+      "callout": { "fontSize": 16, "lineHeight": 22, "fontWeight": "400", "letterSpacing": 0 },
+      "subheadline": { "fontSize": 15, "lineHeight": 20, "fontWeight": "400", "letterSpacing": 0 },
+      "footnote": { "fontSize": 13, "lineHeight": 18, "fontWeight": "400", "letterSpacing": 0 },
+      "caption": { "fontSize": 12, "lineHeight": 16, "fontWeight": "400", "letterSpacing": 0.1 },
+      "micro": { "fontSize": 11, "lineHeight": 14, "fontWeight": "500", "letterSpacing": 0.1 }
+    },
+    "allowFontScaling": true,
+    "minimumScaleFactor": 0.85
+  },
+  "spacing": {
+    "none": 0,
+    "xxs": 2,
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 20,
+    "2xl": 24,
+    "3xl": 32,
+    "4xl": 40,
+    "5xl": 48,
+    "6xl": 64
+  },
+  "sizing": {
+    "minimumTouchTarget": 44,
+    "iconSmall": 16,
+    "iconMedium": 20,
+    "iconLarge": 24,
+    "iconXLarge": 32,
+    "buttonHeightSmall": 36,
+    "buttonHeightMedium": 48,
+    "buttonHeightLarge": 56,
+    "inputHeight": 52,
+    "headerHeight": 56,
+    "tabBarContentHeight": 56,
+    "bottomActionHeight": 56,
+    "contentMaxWidth": null
+  },
+  "radius": {
+    "none": 0,
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 20,
+    "2xl": 24,
+    "pill": 999
+  },
+  "border": {
+    "hairlineWidth": 0.5,
+    "standardWidth": 1,
+    "focusWidth": 2
+  },
+  "elevation": {
+    "none": { "shadowOpacity": 0, "elevation": 0 },
+    "small": { "shadowColor": "#000000", "shadowOpacity": 0.06, "shadowRadius": 4, "shadowOffset": { "width": 0, "height": 2 }, "elevation": 2 },
+    "medium": { "shadowColor": "#000000", "shadowOpacity": 0.10, "shadowRadius": 10, "shadowOffset": { "width": 0, "height": 4 }, "elevation": 4 },
+    "large": { "shadowColor": "#000000", "shadowOpacity": 0.16, "shadowRadius": 18, "shadowOffset": { "width": 0, "height": 8 }, "elevation": 8 }
+  },
+  "layout": {
+    "screenHorizontalPadding": 20,
+    "sectionSpacing": 28,
+    "cardGap": 12,
+    "listItemMinHeight": 56,
+    "header": {
+      "height": 56,
+      "horizontalPadding": 16,
+      "showBottomBorder": false
+    },
+    "tabBar": {
+      "contentHeight": 56,
+      "horizontalPadding": 12,
+      "topPadding": 6,
+      "bottomPadding": 4,
+      "position": "bottom",
+      "respectSafeArea": true
+    },
+    "bottomAction": {
+      "minHeight": 56,
+      "horizontalPadding": 20,
+      "verticalPadding": 12,
+      "respectSafeArea": true
+    },
+    "scrollView": {
+      "keyboardShouldPersistTaps": "handled",
+      "showsVerticalScrollIndicator": false,
+      "contentInsetAdjustmentBehavior": "automatic"
+    }
+  },
+  "components": {
+    "button": {
+      "height": { "small": 36, "medium": 48, "large": 56 },
+      "radius": "pill",
+      "horizontalPadding": 24,
+      "variants": ["primary", "secondary", "tertiary", "destructive"],
+      "disabledOpacity": 0.45
+    },
+    "input": {
+      "height": 52,
+      "radius": "md",
+      "borderWidth": 1,
+      "horizontalPadding": 16,
+      "labelSpacing": 8,
+      "errorSpacing": 6
+    },
+    "productCard": {
+      "radius": "lg",
+      "padding": 12,
+      "imageAspectRatio": 1,
+      "imageFit": "contain",
+      "titleLines": 2,
+      "priceSpacing": 6
+    },
+    "productGallery": {
+      "imageAspectRatio": 1,
+      "imageFit": "contain",
+      "indicatorSize": 6
+    },
+    "badge": {
+      "height": 22,
+      "horizontalPadding": 8,
+      "radius": "pill"
+    },
+    "modal": {
+      "radiusTop": "2xl",
+      "horizontalPadding": 20,
+      "topPadding": 24,
+      "backdropColor": "overlay"
+    },
+    "bottomSheet": {
+      "radiusTop": "2xl",
+      "horizontalPadding": 20,
+      "topPadding": 16,
+      "handleWidth": 36,
+      "handleHeight": 5
+    },
+    "toast": {
+      "minHeight": 48,
+      "radius": "md",
+      "horizontalPadding": 16
+    }
+  },
+  "motion": {
+    "pressDurationMs": 100,
+    "standardDurationMs": 220,
+    "emphasizedDurationMs": 320,
+    "sheetDurationMs": 280,
+    "easing": "easeInOut",
+    "respectReduceMotion": true
+  },
+  "accessibility": {
+    "minimumTouchTarget": 44,
+    "supportScreenReaders": true,
+    "supportDynamicType": true,
+    "doNotUseColorAsOnlyIndicator": true,
+    "requireAccessibleLabelsForIconButtons": true,
+    "respectReduceMotion": true,
+    "contrastTarget": "WCAG AA"
+  },
+  "productExperience": {
+    "imageBackground": "surface",
+    "imageResizeMode": "contain",
+    "showAvailability": true,
+    "showVariantSelection": true,
+    "variantDimensions": ["color", "storage", "size"],
+    "priceCurrency": "MYR",
+    "priceLocale": "en-MY"
+  },
+  "implementation": {
+    "sourceOfTruth": "design_system.json",
+    "consumer": "App.jsx",
+    "architecture": "single-source-file-app-with-external-design-token-data",
+    "rules": [
+      "Read and validate this JSON before mapping tokens into App.jsx.",
+      "Reference semantic tokens instead of repeating raw color, spacing, radius, and typography values.",
+      "Resolve light or dark color tokens from the active theme.",
+      "Use runtime safe-area insets and actual screen dimensions.",
+      "Do not treat sizing values as fixed physical pixels; values are React Native density-independent units.",
+      "Keep business data, API configuration, secrets, and product catalog data out of this design system.",
+      "Do not assume fonts or icon packages are installed; use platform system fonts and verified dependencies.",
+      "If a token changes, update the consuming styles consistently."
+    ]
+  }
+}
