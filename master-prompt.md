@@ -56,3 +56,61 @@ StandalonePages
 - Tombol LiveChat pada BottomNavigation membuka StandalonePage LiveChat.
 - StandalonePages tidak menampilkan GlobalHeader atau BottomNavigation milik AppShell.
 - Navigasi antarhalaman harus konsisten dan status navigasi aktif harus mencerminkan tujuan saat ini jika relevan.
+
+### 4. Overlay
+
+Overlay adalah sistem antarmuka yang ditampilkan di atas halaman aktif. Overlay dapat dipanggil dari AppShell maupun StandalonePages dan bukan merupakan halaman navigasi.
+
+#### Overlay Structure
+
+```text
+Overlay
+├── Modal
+│   ├── QuickViewModal
+│   └── ConfirmationModal
+│
+├── Drawer
+│   ├── CartDrawer
+│   └── FilterDrawer
+│
+├── BottomSheet
+│   ├── SortBottomSheet
+│   ├── FilterBottomSheet
+│   ├── VariantBottomSheet
+│   ├── QuantityBottomSheet
+│   └── ShareBottomSheet
+│
+├── Dialog
+│   ├── AlertDialog
+│   └── ConfirmDialog
+│
+├── Popover
+│
+└── Toast
+    ├── SuccessToast
+    ├── ErrorToast
+    └── InfoToast
+```
+
+#### Overlay Rules
+
+- Overlay bukan halaman navigasi dan tidak menggantikan struktur halaman aktif.
+- Overlay dapat dipanggil dari AppShell maupun StandalonePages.
+- Setiap overlay harus memiliki mekanisme untuk membuka dan menutup.
+- Modal digunakan untuk menampilkan konten atau interaksi terpusat.
+- Drawer digunakan untuk menampilkan panel dari sisi layar.
+- Dialog digunakan untuk menyampaikan informasi atau meminta konfirmasi tindakan.
+- Popover digunakan untuk menampilkan informasi atau menu kecil yang kontekstual.
+- Toast digunakan untuk menyampaikan notifikasi sementara.
+- Overlay yang aktif harus tampil di atas konten halaman dan mengatur interaksi dengan backdrop secara tepat.
+
+#### BottomSheet Rules
+
+- BottomSheet merupakan komponen tersendiri di dalam Overlay, bukan turunan Modal atau Drawer.
+- BottomSheet dirancang mobile-first dan menggunakan lebar layar yang tersedia.
+- BottomSheet mendukung tinggi dinamis sesuai kebutuhan konten.
+- BottomSheet menampilkan drag handle.
+- BottomSheet mendukung gesture swipe down untuk menutup.
+- BottomSheet mendukung backdrop.
+- Konten panjang menggunakan area scroll internal.
+- Ketika BottomSheet aktif, interaksi dengan halaman di belakangnya harus dicegah.
