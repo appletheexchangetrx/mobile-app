@@ -44,7 +44,10 @@ StandalonePages
 ├── Cart
 ├── LiveChat
 ├── ProductDetailPage
-└── CheckoutPage
+├── CheckoutPage
+├── OrderSuccessPage
+├── OrdersPage
+└── OrderDetailPage
 ```
 
 ### 3. Navigation Rules
@@ -59,6 +62,9 @@ StandalonePages
 - Memilih produk dari Products membuka StandalonePage ProductDetailPage.
 - ProductDetailPage dapat mengarahkan pengguna ke Cart.
 - Cart menyediakan akses untuk melanjutkan ke StandalonePage CheckoutPage.
+- CheckoutPage mengarahkan pengguna ke OrderSuccessPage setelah pesanan berhasil dibuat.
+- OrdersPage menampilkan daftar pesanan pengguna.
+- Memilih pesanan dari OrdersPage membuka StandalonePage OrderDetailPage.
 - StandalonePages tidak menampilkan GlobalHeader atau BottomNavigation milik AppShell.
 - Navigasi antarhalaman harus konsisten dan status navigasi aktif harus mencerminkan tujuan saat ini jika relevan.
 
