@@ -42,7 +42,9 @@ StandalonePages adalah halaman mandiri yang ditampilkan di luar AppShell. Halama
 StandalonePages
 ├── Notification
 ├── Cart
-└── LiveChat
+├── LiveChat
+├── ProductDetailPage
+└── CheckoutPage
 ```
 
 ### 3. Navigation Rules
@@ -54,6 +56,9 @@ StandalonePages
 - Tombol Cart pada GlobalHeader membuka StandalonePage Cart.
 - Tombol Profile pada GlobalHeader membuka halaman Profile di MainContent.
 - Tombol LiveChat pada BottomNavigation membuka StandalonePage LiveChat.
+- Memilih produk dari Products membuka StandalonePage ProductDetailPage.
+- ProductDetailPage dapat mengarahkan pengguna ke Cart.
+- Cart menyediakan akses untuk melanjutkan ke StandalonePage CheckoutPage.
 - StandalonePages tidak menampilkan GlobalHeader atau BottomNavigation milik AppShell.
 - Navigasi antarhalaman harus konsisten dan status navigasi aktif harus mencerminkan tujuan saat ini jika relevan.
 
